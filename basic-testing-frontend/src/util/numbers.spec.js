@@ -34,6 +34,7 @@ describe("cleanNumbers()", () => {
 
     expect(actual[0]).toBeTypeOf("number");
     expect(actual[1]).toBeTypeOf("number");
+    expect(actual).toEqual([1, 2]);
   });
 
   it("Should throw error if at least one empty string is provided", () => {
