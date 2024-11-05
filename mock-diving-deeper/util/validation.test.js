@@ -11,15 +11,15 @@ describe("Validation - validateNotEmpty()", () => {
     expect(result).toThrowError("Failed");
   });
 
-  it("Should throw error with the provided message if a empty text is provided", () => {
+  it("Should throw error with the provided message if an empty text is provided", () => {
     const result = () => {
-      validateNotEmpty("", "Failed");
+      validateNotEmpty("  ", "Failed");
     };
     expect(result).toThrowError(ValidationError);
     expect(result).toThrowError("Failed");
   });
 
-  it("Should not throw erro if a valid text is provided", () => {
+  it("Should not throw error if a valid text is provided", () => {
     const result = () => {
       validateNotEmpty("text", "Failed");
     };

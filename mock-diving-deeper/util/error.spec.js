@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { HttpError, ValidationError } from "./errors";
 
-describe("HttpError", () => {
+describe("class HttpError", () => {
   it("Should contruct the HttpError classe with the provided params", () => {
     const statusCode = 400;
     const message = "Failed!";
@@ -14,9 +14,18 @@ describe("HttpError", () => {
     expect(instance.message).toEqual(message);
     expect(instance.data).toEqual(data);
   });
+
+  it("Should contruct the HttpError with undefined params if no param is provided", () => {
+    const instance = new HttpError();
+
+    expect(instance).toBeTruthy();
+    expect(instance.statusCode).toBeUndefined();
+    expect(instance.message).toBeUndefined();
+    expect(instance.data).toBeUndefined();
+  });
 });
 
-describe("ValidationError", () => {
+describe("class ValidationError", () => {
   it("Should contruct the ValidationError classe with the provided param", () => {
     const message = "Validation failed!";
 
