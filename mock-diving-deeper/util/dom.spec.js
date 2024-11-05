@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { expect, it, vi } from "vitest";
+import { beforeEach, expect, it, vi } from "vitest";
 import { showError } from "./dom";
 import { Window } from "happy-dom";
 
@@ -12,7 +12,29 @@ const document = window.document;
 document.write(indexHtml);
 vi.stubGlobal("document", document);
 
-it("Should show error message", () => {
-  const message = "It failed";
+beforeEach(() => {
+  document.body.innerHTML = "";
+  document.write(indexHtml);
+});
+
+it("Should add an error paragraph to the id='errors' element", () => {
+  const message = "test";
   showError(message);
+  const errorsEl = document.getElementById("errors");
+  const errorParagraph = errorsEl.firstChild;
+  expect(errorParagraph).not.toBeNull();
+});
+
+it("Should not contain an error paragraph initially", () => {
+  const errorsEl = document.getElementById("errors");
+  const errorParagraph = errorsEl.firstChild;
+  expect(errorParagraph).toBeNull();
+});
+
+it("Should display the provided error on the paragraph", () => {
+  const message = "test";
+  showError(message);
+  const errorsEl = document.getElementById("errors");
+  const errorParagraph = errorsEl.firstChild;
+  expect(errorParagraph.textContent).toBe(message);
 });
