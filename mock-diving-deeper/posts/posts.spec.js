@@ -20,4 +20,20 @@ describe("extractPostData()", () => {
     expect(result.title).toBe(testTitle);
     expect(result.content).toBe(testContent);
   });
+
+  it("Should throw error if no title is provided", () => {
+    const result = () => {
+      form.title = null;
+      extractPostData(form);
+    };
+    expect(result).toThrowError(/A title must be provided./);
+  });
+
+  it("Should throw error if no content is provided", () => {
+    const result = () => {
+      form.content = null;
+      extractPostData(form);
+    };
+    expect(result).toThrowError(/Content must not be empty!/);
+  });
 });
